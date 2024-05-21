@@ -134,7 +134,10 @@ func (c *Client) runWithJSON(ctx context.Context, req *Request, resp interface{}
 	}
 	defer res.Body.Close()
 	if res.StatusCode != http.StatusOK {
-		return fmt.Errorf("server returned a non-200 status code: %v", res.StatusCode)
+		return &HttpError{
+			Err:      fmt.Errorf("server returned a non-200 status code: %v", res.StatusCode),
+			Response: res,
+		}
 	}
 	var buf bytes.Buffer
 	if _, err := io.Copy(&buf, res.Body); err != nil {
@@ -315,6 +318,15 @@ type File struct {
 	Field string
 	Name  string
 	R     io.Reader
+}
+
+type HttpError struct {
+	Err      error
+	Response *http.Response
+}
+
+func (e *HttpError) Error() string {
+	return e.Err.Error()
 }
 
 type GraphQLError struct {
