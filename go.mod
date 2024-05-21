@@ -1,4 +1,4 @@
-module github.com/superfly/graphql
+module github.com/AccentDesign/graphql
 
 go 1.22
 
