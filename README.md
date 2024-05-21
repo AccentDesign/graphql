@@ -1,4 +1,4 @@
-# graphql
+# graphql [![Test](https://github.com/AccentDesign/graphql/actions/workflows/test.yml/badge.svg)](https://github.com/AccentDesign/graphql/actions/workflows/test.yml)
 
 Low-level GraphQL client for Go.
 
